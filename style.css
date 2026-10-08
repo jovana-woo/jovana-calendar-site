@@ -195,6 +195,34 @@ section { padding: 56px 0; }
   text-decoration: none;
 }
 .btn:hover { background: var(--accent-soft); color: #1b1530; }
+.btn-lg { padding: 13px 24px; font-size: 1.02rem; box-shadow: 0 10px 30px rgba(155, 110, 224, 0.35); }
+
+.cta { display: flex; align-items: center; flex-wrap: wrap; gap: 16px; margin: 0 0 22px; }
+.cta-sub { color: var(--text-muted); font-size: 0.92rem; }
+
+.steps { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+.steps li {
+  display: flex;
+  gap: 14px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 20px;
+}
+.step-no {
+  flex-shrink: 0;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  font-weight: 700;
+  font-size: 0.9rem;
+  color: #1b1530;
+  background: var(--accent);
+}
+.steps h3 { margin: 2px 0 4px; font-size: 1rem; }
+.steps p { margin: 0; color: var(--text-muted); font-size: 0.92rem; }
 
 footer {
   padding: 36px 0 48px;
@@ -233,6 +261,7 @@ footer .wrap { display: flex; flex-wrap: wrap; gap: 12px; justify-content: space
 @media (max-width: 860px) {
   .hero { grid-template-columns: 1fr; gap: 36px; padding-top: 28px; }
   .features { grid-template-columns: 1fr; }
+  .steps { grid-template-columns: 1fr; }
   .privacy-box { flex-direction: column; align-items: flex-start; }
   .nav-links { gap: 14px; }
   .doc { padding: 26px 20px; }
