@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="0 0 1024 1024">
+  <defs>
+    <radialGradient id="bg" cx="30%" cy="20%" r="100%">
+      <stop offset="0%" stop-color="#2a2a44"></stop>
+      <stop offset="55%" stop-color="#1f1f2e"></stop>
+      <stop offset="100%" stop-color="#16162a"></stop>
+    </radialGradient>
+    <radialGradient id="glow" cx="50%" cy="55%" r="40%">
+      <stop offset="0%" stop-color="#c79bf2" stop-opacity="0.18"></stop>
+      <stop offset="100%" stop-color="#c79bf2" stop-opacity="0"></stop>
+    </radialGradient>
+    <linearGradient id="cFill" x1="20%" y1="10%" x2="85%" y2="95%">
+      <stop offset="0%" stop-color="#e3c6ff"></stop>
+      <stop offset="45%" stop-color="#c79bf2"></stop>
+      <stop offset="100%" stop-color="#9b6ee0"></stop>
+    </linearGradient>
+    <linearGradient id="cSheen" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.55"></stop>
+      <stop offset="60%" stop-color="#ffffff" stop-opacity="0"></stop>
+    </linearGradient>
+    <radialGradient id="dotFill" cx="35%" cy="35%" r="65%">
+      <stop offset="0%" stop-color="#ffffff"></stop>
+      <stop offset="55%" stop-color="#e3c6ff"></stop>
+      <stop offset="100%" stop-color="#b387ec"></stop>
+    </radialGradient>
+    <clipPath id="round">
+      <rect x="0" y="0" width="1024" height="1024" rx="184" ry="184"></rect>
+    </clipPath>
+    <filter id="cShadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="14"></feGaussianBlur>
+      <feOffset dy="8"></feOffset>
+      <feFlood flood-color="#c79bf2" flood-opacity="0.25"></feFlood>
+      <feComposite in2="SourceAlpha" operator="in"></feComposite>
+      <feMerge>
+        <feMergeNode></feMergeNode>
+        <feMergeNode in="SourceGraphic"></feMergeNode>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <g clip-path="url(#round)">
+    <rect width="1024" height="1024" fill="url(#bg)"></rect>
+    <rect width="1024" height="1024" fill="url(#glow)"></rect>
+    <g transform="translate(512 512) scale(4)" filter="url(#cShadow)">
+      <circle r="78" fill="none" stroke="url(#cFill)" stroke-width="2" opacity="0.18"></circle>
+      <circle r="62" fill="none" stroke="url(#cFill)" stroke-width="32" stroke-linecap="round" stroke-dasharray="295 600" transform="rotate(33)"></circle>
+      <circle r="62" fill="none" stroke="url(#cSheen)" stroke-width="32" stroke-linecap="round" stroke-dasharray="150 600" transform="rotate(-150)" opacity="0.6"></circle>
+      <circle cx="58" cy="-2" r="13" fill="url(#dotFill)"></circle>
+      <circle cx="58" cy="-2" r="13" fill="none" stroke="#ffffff" stroke-opacity="0.25" stroke-width="1"></circle>
+    </g>
+  </g>
+</svg>

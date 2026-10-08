@@ -4,19 +4,112 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Jovana Calendar</title>
-<style>
-  body { font-family: system-ui, "Malgun Gothic", sans-serif; max-width: 720px; margin: 40px auto; padding: 0 16px; line-height: 1.7; color: #222; background: #fff; }
-  h1 { font-size: 1.6rem; }
-  a { color: #1a73e8; }
-</style>
+<meta name="description" content="Windows 바탕화면에 항상 보이는 월간 달력, Google Calendar 양방향 동기화.">
+<link rel="icon" href="logo.svg" type="image/svg+xml">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
-<h1>Jovana Calendar (조바나 캘린더)</h1>
-<p>Jovana Calendar는 Windows 바탕화면에 월간 달력을 표시하고, 사용자의 Google Calendar와 일정을 양방향으로 동기화하는 개인용 데스크톱 앱입니다.</p>
-<p>Jovana Calendar is a personal Windows desktop widget that shows a monthly calendar on the desktop and syncs events with the user's own Google Calendar.</p>
-<ul>
-  <li><a href="privacy.html">개인정보처리방침 / Privacy Policy</a></li>
-</ul>
-<p>문의 / Contact: cdy8834@gmail.com</p>
+<header class="wrap nav">
+  <a class="brand" href="./"><img src="logo.svg" alt="">Jovana Calendar</a>
+  <nav class="nav-links">
+    <a href="#features">기능</a>
+    <a href="#privacy">개인정보</a>
+  </nav>
+</header>
+
+<main>
+  <div class="wrap hero">
+    <div>
+      <span class="eyebrow">Windows 바탕화면 달력 위젯</span>
+      <h1>바탕화면에 늘 펼쳐진<br><span class="grad">나만의 달력</span></h1>
+      <p class="lead">조바나 캘린더는 바탕화면 아이콘 바로 위에 월간 달력을 띄워 두고, Google 캘린더와 일정을 양방향으로 자동 동기화하는 개인용 앱입니다.</p>
+      <div class="badges">
+        <span class="badge">Windows 10 / 11</span>
+        <span class="badge">Google Calendar 동기화</span>
+        <span class="badge">데이터는 내 PC에만</span>
+      </div>
+    </div>
+    <div class="mock" aria-label="조바나 캘린더 화면 예시 (예시 데이터)">
+      <div class="mock-bar">
+        <span><span class="mock-dot"></span>동기화됨</span>
+        <strong>‹ 2026년 10월 ›</strong>
+        <span>⟳ ⚙</span>
+      </div>
+      <div class="mock-grid">
+        <div class="dow sun">일</div><div class="dow">월</div><div class="dow">화</div><div class="dow">수</div><div class="dow">목</div><div class="dow">금</div><div class="dow">토</div>
+          <div class="cell muted">27</div>
+          <div class="cell muted">28</div>
+          <div class="cell muted">29</div>
+          <div class="cell muted">30</div>
+          <div class="cell">1</div>
+          <div class="cell">2</div>
+          <div class="cell"><span style="color:var(--holiday)">3</span><span class="chip r">개천절</span></div>
+          <div class="cell"><span style="color:var(--holiday)">4</span></div>
+          <div class="cell">5<span class="chip b">주간 회의</span></div>
+          <div class="cell">6</div>
+          <div class="cell">7</div>
+          <div class="cell today">8<span class="chip p">디자인 리뷰</span><span class="chip g">점심 약속</span></div>
+          <div class="cell"><span style="color:var(--holiday)">9</span><span class="chip r">한글날</span></div>
+          <div class="cell">10</div>
+          <div class="cell"><span style="color:var(--holiday)">11</span></div>
+          <div class="cell">12<span class="chip b">주간 회의</span></div>
+          <div class="cell">13</div>
+          <div class="cell">14<span class="chip g">운동</span></div>
+          <div class="cell">15</div>
+          <div class="cell">16<span class="chip p">프로젝트 마감</span></div>
+          <div class="cell">17</div>
+          <div class="cell"><span style="color:var(--holiday)">18</span></div>
+          <div class="cell">19<span class="chip b">주간 회의</span></div>
+          <div class="cell">20</div>
+          <div class="cell">21</div>
+          <div class="cell">22<span class="chip g done">병원 예약</span></div>
+          <div class="cell">23</div>
+          <div class="cell">24<span class="chip p">가족 모임</span></div>
+          <div class="cell"><span style="color:var(--holiday)">25</span></div>
+          <div class="cell">26<span class="chip b">주간 회의</span></div>
+          <div class="cell">27</div>
+          <div class="cell">28</div>
+          <div class="cell">29</div>
+          <div class="cell">30<span class="chip p">월말 정산</span></div>
+          <div class="cell">31</div>
+      </div>
+    </div>
+  </div>
+
+  <section id="features">
+    <div class="wrap">
+      <h2 class="section-title">작지만 꼭 필요한 기능</h2>
+      <p class="section-sub">업무 화면을 가리지 않고, 필요할 때 한눈에.</p>
+      <div class="features">
+        <div class="card"><div class="ico">🖥️</div><h3>바탕화면 고정</h3><p>다른 창 뒤, 아이콘 위에 조용히 자리 잡습니다. 작업표시줄을 차지하지 않고 트레이에서 표시·숨기기.</p></div>
+        <div class="card"><div class="ico">🔄</div><h3>Google 양방향 동기화</h3><p>여기서 등록한 일정은 Google 캘린더에, 휴대폰에서 등록한 일정은 달력에. 2분마다 자동으로 맞춥니다.</p></div>
+        <div class="card"><div class="ico">💻</div><h3>여러 PC에서 같은 달력</h3><p>사무실 두 대, 집 한 대 — 같은 계정이면 어디서나 같은 일정이 보입니다.</p></div>
+        <div class="card"><div class="ico">🎨</div><h3>테마 7종 · 색상 18가지</h3><p>기본, 엑셀, 핑크, 다크, 레트로, 노르드, 터미널. 일정마다 색과 글씨색을 따로 지정.</p></div>
+        <div class="card"><div class="ico">↻</div><h3>매년 갱신</h3><p>생일·기념일 같은 종일 일정은 한 번만 등록하면 다음 해에도 자동으로 이어집니다.</p></div>
+        <div class="card"><div class="ico">📊</div><h3>엑셀 가져오기·내보내기</h3><p>기존 달력 프로그램의 엑셀 파일을 그대로 불러오고, 일정을 엑셀로 백업할 수 있습니다.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="privacy">
+    <div class="wrap">
+      <div class="privacy-box">
+        <div>
+          <h2 class="section-title">일정은 내 PC와 내 Google 계정에만</h2>
+          <p>별도 서버가 없습니다. 일정과 로그인 정보는 이 PC에 암호화해 저장하고, Google 캘린더 외에는 어디에도 보내지 않습니다.</p>
+        </div>
+        <a class="btn" href="privacy.html">개인정보처리방침</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© 2026 Jovana Calendar — Jo Dong-yeon</span>
+    <span>문의 · <a href="mailto:cdy8834@gmail.com">cdy8834@gmail.com</a></span>
+  </div>
+</footer>
 </body>
 </html>
