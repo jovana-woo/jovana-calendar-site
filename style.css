@@ -271,3 +271,26 @@ footer .wrap { display: flex; flex-wrap: wrap; gap: 12px; justify-content: space
   .cell { min-height: 46px; }
   .chip { font-size: 0.55rem; }
 }
+
+/* 업데이트 내역 */
+.releases { list-style: none; padding: 0; margin: 0; display: grid; gap: 12px; }
+.release {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 18px 22px;
+}
+.release-head { display: flex; align-items: center; flex-wrap: wrap; gap: 10px; }
+.release-head strong { font-size: 1.05rem; color: var(--accent-soft); }
+.release-latest {
+  padding: 1px 9px;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #1b1530;
+  background: var(--accent);
+}
+.release-date { margin-left: auto; color: var(--text-muted); font-size: 0.85rem; }
+.release p { margin: 6px 0 0; color: var(--text-muted); font-size: 0.92rem; word-break: keep-all; overflow-wrap: anywhere; }
+.release-empty { color: var(--text-muted); font-size: 0.92rem; }
+.releases-more { margin: 14px 0 0; font-size: 0.9rem; }

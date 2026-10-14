@@ -15,6 +15,7 @@
   <nav class="nav-links">
     <a href="#features">기능</a>
     <a href="#install">설치</a>
+    <a href="#releases">업데이트</a>
     <a href="#privacy">개인정보</a>
   </nav>
 </header>
@@ -110,6 +111,17 @@
     </div>
   </section>
 
+  <section id="releases">
+    <div class="wrap">
+      <h2 class="section-title">업데이트 내역</h2>
+      <p class="section-sub">최근 3개 버전입니다. 설치된 앱은 새 버전을 자동으로 받습니다.</p>
+      <ul class="releases" id="release-list">
+        <li class="release-empty">불러오는 중…</li>
+      </ul>
+      <p class="releases-more"><a href="https://github.com/jovana-woo/jovana-calendar-site/releases">전체 내역 보기 →</a></p>
+    </div>
+  </section>
+
   <section id="privacy">
     <div class="wrap">
       <div class="privacy-box">
@@ -129,5 +141,49 @@
     <span>문의 · <a href="mailto:cdy8834@gmail.com">cdy8834@gmail.com</a></span>
   </div>
 </footer>
+<script>
+(function () {
+  var list = document.getElementById('release-list');
+  function fmt(iso) {
+    var d = new Date(iso);
+    return d.getFullYear() + '. ' + (d.getMonth() + 1) + '. ' + d.getDate() + '.';
+  }
+  function fail() {
+    list.innerHTML = '<li class="release-empty">내역을 불러오지 못했습니다. 아래 「전체 내역 보기」에서 확인하세요.</li>';
+  }
+  fetch('https://api.github.com/repos/jovana-woo/jovana-calendar-site/releases?per_page=3')
+    .then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); })
+    .then(function (rels) {
+      rels = rels.filter(function (r) { return !r.draft && !r.prerelease; }).slice(0, 3);
+      if (!rels.length) return fail();
+      list.innerHTML = '';
+      rels.forEach(function (r, i) {
+        var li = document.createElement('li');
+        li.className = 'release';
+        var head = document.createElement('div');
+        head.className = 'release-head';
+        var ver = document.createElement('strong');
+        ver.textContent = r.tag_name;
+        head.appendChild(ver);
+        if (i === 0) {
+          var tag = document.createElement('span');
+          tag.className = 'release-latest';
+          tag.textContent = '최신';
+          head.appendChild(tag);
+        }
+        var date = document.createElement('span');
+        date.className = 'release-date';
+        date.textContent = fmt(r.published_at);
+        head.appendChild(date);
+        var body = document.createElement('p');
+        body.textContent = (r.body || '').trim() || '변경 요약 없음';
+        li.appendChild(head);
+        li.appendChild(body);
+        list.appendChild(li);
+      });
+    })
+    .catch(fail);
+})();
+</script>
 </body>
 </html>
