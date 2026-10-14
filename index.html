@@ -39,10 +39,10 @@
     <div class="mock" aria-label="조바나 캘린더 화면 예시 (예시 데이터)">
       <div class="mock-bar">
         <span><span class="mock-dot"></span>동기화됨</span>
-        <strong>‹ 2026년 10월 ›</strong>
+        <strong id="mock-title">‹ 2026년 10월 ›</strong>
         <span>⟳ ⚙</span>
       </div>
-      <div class="mock-grid">
+      <div class="mock-grid" id="mock-grid">
         <div class="dow sun">일</div><div class="dow">월</div><div class="dow">화</div><div class="dow">수</div><div class="dow">목</div><div class="dow">금</div><div class="dow">토</div>
           <div class="cell muted">27</div>
           <div class="cell muted">28</div>
@@ -142,6 +142,93 @@
   </div>
 </footer>
 <script>
+// 예시 달력을 방문한 날의 달로 다시 그린다 (스크립트가 안 돌면 HTML의 10월 그림이 그대로 보임)
+(function () {
+  var grid = document.getElementById('mock-grid');
+  var title = document.getElementById('mock-title');
+  if (!grid || !title) return;
+
+  // 양력 공휴일 (월-일)
+  var SOLAR = { '1-1': '신정', '3-1': '삼일절', '5-5': '어린이날', '6-6': '현충일',
+    '8-15': '광복절', '10-3': '개천절', '10-9': '한글날', '12-25': '성탄절' };
+  // 음력 공휴일 (연-월-일) — 예시용, 2026~2028
+  var LUNAR = {
+    '2026-2-16': '설날', '2026-2-17': '설날', '2026-2-18': '설날', '2026-5-24': '부처님오신날',
+    '2026-9-24': '추석', '2026-9-25': '추석', '2026-9-26': '추석',
+    '2027-2-6': '설날', '2027-2-7': '설날', '2027-2-8': '설날', '2027-5-13': '부처님오신날',
+    '2027-9-14': '추석', '2027-9-15': '추석', '2027-9-16': '추석',
+    '2028-1-26': '설날', '2028-1-27': '설날', '2028-1-28': '설날', '2028-5-2': '부처님오신날',
+    '2028-10-2': '추석', '2028-10-3': '추석', '2028-10-4': '추석'
+  };
+  function holidayOf(y, m, d) {
+    return LUNAR[y + '-' + m + '-' + d] || SOLAR[m + '-' + d] || null;
+  }
+
+  var now = new Date();
+  var y = now.getFullYear();
+  var m = now.getMonth() + 1;
+  var today = now.getDate();
+  var last = new Date(y, m, 0).getDate();
+  var firstDow = new Date(y, m - 1, 1).getDay();
+  var prevLast = new Date(y, m - 1, 0).getDate();
+
+  // 예시 일정 — 날짜가 아니라 위치 규칙으로 배치 [제목, 색, 완료 여부]
+  function sampleEvents(d, dow) {
+    var list = [];
+    if (d === today) {
+      list.push(['디자인 리뷰', 'p']);
+      list.push(['점심 약속', 'g']);
+    }
+    if (dow === 1) list.push(['주간 회의', 'b']);
+    if (d === 14) list.push(['운동', 'g']);
+    if (d === 16) list.push(['프로젝트 마감', 'p']);
+    if (d === 22) list.push(['병원 예약', 'g', d < today]);
+    if (d === 24) list.push(['가족 모임', 'p']);
+    if (d === last) list.push(['월말 정산', 'p']);
+    return list;
+  }
+
+  function chip(text, color, done) {
+    var c = document.createElement('span');
+    c.className = 'chip ' + color + (done ? ' done' : '');
+    c.textContent = text;
+    return c;
+  }
+
+  function cell(label, cls) {
+    var c = document.createElement('div');
+    c.className = 'cell' + (cls ? ' ' + cls : '');
+    c.textContent = label;
+    return c;
+  }
+
+  // 요일 머리글은 두고 날짜 칸만 교체
+  grid.querySelectorAll('.cell').forEach(function (c) { c.remove(); });
+
+  for (var i = firstDow; i > 0; i--) grid.appendChild(cell(String(prevLast - i + 1), 'muted'));
+
+  for (var d = 1; d <= last; d++) {
+    var dow = (firstDow + d - 1) % 7;
+    var c = document.createElement('div');
+    c.className = 'cell' + (d === today ? ' today' : '');
+    var holiday = holidayOf(y, m, d);
+    var num = document.createElement('span');
+    num.textContent = String(d);
+    if (dow === 0 || holiday) num.style.color = 'var(--holiday)';
+    c.appendChild(num);
+    var chips = [];
+    if (holiday) chips.push([holiday, 'r']);
+    chips = chips.concat(sampleEvents(d, dow)).slice(0, 2); // 칸이 작아 최대 2개
+    chips.forEach(function (e) { c.appendChild(chip(e[0], e[1], e[2])); });
+    grid.appendChild(c);
+  }
+
+  var trailing = (7 - ((firstDow + last) % 7)) % 7;
+  for (var n = 1; n <= trailing; n++) grid.appendChild(cell(String(n), 'muted'));
+
+  title.textContent = '‹ ' + y + '년 ' + m + '월 ›';
+})();
+
 (function () {
   var list = document.getElementById('release-list');
   function fmt(iso) {
